@@ -1,26 +1,21 @@
-<script lang="ts">
-	import {
-		Backpack,
-		CalendarCheck,
-		HeartHandshake,
-		Plus,
-		Send,
-		Shield,
-		Users
-	} from '@lucide/svelte';
-	import { onMount } from 'svelte';
+<script>
+	import { browser } from '$app/environment';
+	import Backpack from '@lucide/svelte/icons/backpack';
+	import CalendarCheck from '@lucide/svelte/icons/calendar-check';
+	import HeartHandshake from '@lucide/svelte/icons/heart-handshake';
+	import Plus from '@lucide/svelte/icons/plus';
+	import Send from '@lucide/svelte/icons/send';
+	import Shield from '@lucide/svelte/icons/shield';
+	import Users from '@lucide/svelte/icons/users';
 
-	let visible = $state(false);
-
-	onMount(() => {
-		const t = setTimeout(() => (visible = true), 60);
-		return () => clearTimeout(t);
-	});
+	let visible = false;
+	if (browser) setTimeout(() => (visible = true), 60);
 
 	// Keeping this for later when you re-enable the form
-	let email = $state('');
+	let email = '';
 
-	function handleSubmit(e: SubmitEvent) {
+	/** @param {SubmitEvent} e */
+	function handleSubmit(e) {
 		e.preventDefault();
 		alert(`Thanks for subscribing with: ${email}`);
 		email = '';
